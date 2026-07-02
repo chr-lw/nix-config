@@ -83,7 +83,7 @@ in
 
   networking = {
     hostId = "4b3c47ff"; # NEVER change this!!!
-    hostName = "nix";
+    hostName = "nix-laptop";
     firewall = {
       enable = true;
       trustedInterfaces = [ "tailscale0" ];

@@ -2,8 +2,8 @@
   description = "Unified NixOS + home-manager config";
 
   inputs = {
-    # Conservative/stable pin:
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
@@ -11,12 +11,18 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }:
   let
-    mkSystem = hostName: modules:
+    system = "x86_64-linux";
+
+    mkSystem = { hostName, modules }:
       nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit self; };
+        inherit system;
+        specialArgs = {
+          inherit self;
+          # available in NixOS modules as: pkgs-unstable.<pkg>
+          pkgs-unstable = import nixpkgs-unstable { inherit system; };
+        };
         modules = modules ++ [
           { networking.hostName = hostName; }
         ];
@@ -24,24 +30,34 @@
   in
   {
     nixosConfigurations = {
-      laptop = mkSystem "laptop" [
-        ./hosts/laptop/configuration.nix
-      ];
+      laptop = mkSystem {
+        hostName = "laptop";
+        modules = [
+          ./hosts/laptop/configuration.nix
+          ./hosts/laptop/hardware-configuration.nix
+          ];
+      };
 
-      server-a = mkSystem "server-a" [
-        ./hosts/server-a/configuration.nix
-      ];
+      home-server = mkSystem {
+        hostName = "home-server";
+        modules = [ ./hosts/home-server/configuration.nix ];
+      };
 
-      server-b = mkSystem "server-b" [
-        ./hosts/server-b/configuration.nix
-      ];
+      home-lab = mkSystem {
+        hostName = "home-lab";
+        modules = [ ./hosts/home-lab/configuration.nix ];
+      };
     };
 
-    # home-manager on non-NixOS (CachyOS workstation)
+    # home-manager on non-NixOS (CachyOS workstation) on unstable
     homeConfigurations."john@cachyos" = home-manager.lib.homeManagerConfiguration {
-      pkgs = import nixpkgs { system = "x86_64-linux"; };
+      pkgs = import nixpkgs-unstable { inherit system; };
       modules = [ ./home/john/cachyos.nix ];
-      extraSpecialArgs = { inherit self; };
+      extraSpecialArgs = {
+        inherit self;
+        # optional, for consistency in HM modules:
+        pkgs-unstable = import nixpkgs-unstable { inherit system; };
+      };
     };
   };
 }
