@@ -1,0 +1,1 @@
+# copy your existing /etc/nixos/hardware-configuration.nix here (unchanged)

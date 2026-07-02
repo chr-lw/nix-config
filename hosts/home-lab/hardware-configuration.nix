@@ -1,0 +1,1 @@
+# after installing NixOS on home-lab, copy /etc/nixos/hardware-configuration.nix here
