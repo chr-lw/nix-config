@@ -6,12 +6,12 @@ let
 in
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
       ./hardware-configuration.nix
     ];
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_6_12;
+    kernelPackages = pkgs.linuxKernel.packages.linux_6_12;
 
     loader = {
       systemd-boot.enable = true;
@@ -21,10 +21,7 @@ in
     supportedFilesystems = [ "zfs" ];
     zfs.package = pkgs.zfs_2_4;
 
-    initrd.systemd = {
-      enable = true;
-      network.wait-online.enable = false;
-    };
+    initrd.systemd = network.wait-online.enable = false;
 
     kernelParams = [
       "amdgpu.dcfeaturemask=0x2"
@@ -75,15 +72,11 @@ in
     }
   ];
 
-  zramSwap = {
-    enable = true;
-    priority = 10;
-    algorithm = "lz4";
-  };
+  zramSwap.enable = true;
 
   networking = {
     hostId = "4b3c47ff"; # NEVER change this!!!
-    hostName = "nix-laptop";
+    hostName = "nixos-laptop";
     firewall = {
       enable = true;
       trustedInterfaces = [ "tailscale0" ];
@@ -92,33 +85,35 @@ in
 
     nftables.enable = true;
 
+    nameservers = [
+      # Mullvad base DNS
+      "194.242.2.4"
+      
+      # Quad9
+      "9.9.9.9"
+      "149.112.112.112"
+
+      # Cloudflare
+      "1.1.1.1"
+    ];
+
     networkmanager = {
       enable = true;
       dns = "systemd-resolved";
-      wifi.powersave = false;
+      wifi.powersave = false; # This sometimes breaks my connection on eduroam.
       unmanaged = [ "interface-name:p2p-dev-*" ];
       plugins = with pkgs; [
-        networkmanager-openconnect
+        networkmanager-openconnect # This is for my university's VPN, based on Cisco AnyConnect.
       ];
     };
 
-    wireless.enable = false; # Disable wpa_supplicant when networkmanager is enabled. Was not needed in Gnome, but is needed in KDE
+    wireless.enable = false; # Disable wpa_supplicant when networkmanager is enabled. The default value is false, but it is enabled under KDE, so we need to disable it.
   };
 
   services = {
     resolved = {
       enable = true;
-      dnssec = "false";
-      dnsovertls = "opportunistic";
-      fallbackDns = [
-        "9.9.9.9#dns.quad9.net"
-        "149.112.112.112#dns.quad9.net"
-        "1.1.1.1#cloudflare-dns.com"
-      ];
-      extraConfig = ''
-        DNS=194.242.2.4#base.dns.mullvad.net
-        DNSOverTLS=opportunistic
-      '';
+      settings.Resolve.DNSOverTLS = "opportunistic";
     };
 
     tailscale.enable = true;
@@ -139,10 +134,6 @@ in
       sddm.enable = true;
       sddm.wayland.enable = true;
       defaultSession = "plasma";
-      autoLogin = {
-        enable = true;
-        user = "john";
-      };
     };
 
     desktopManager.plasma6.enable = true;
@@ -157,14 +148,10 @@ in
       jack.enable = true;
     };
 
-    libinput.enable = true;
     fwupd.enable = true;
     flatpak.enable = true;
 
-    zfs = {
-      autoScrub.enable = true;
-      trim.enable = true;
-    };
+    zfs.autoScrub.enable = true;
 
     printing = {
       enable = true;
@@ -188,7 +175,6 @@ in
   hardware = {
     enableAllFirmware = true;
     cpu.amd.updateMicrocode = true;
-    wirelessRegulatoryDatabase = true;
 
     bluetooth = {
       enable = true;
@@ -214,6 +200,7 @@ in
   virtualisation.podman = {
     enable = true;
     dockerCompat = true;
+    autoPrune.enable = true;
   };
 
   programs = {
@@ -221,10 +208,7 @@ in
     mosh.enable = true;
     neovim.enable = true;
     partition-manager.enable = true;
-    direnv = {
-      enable = true;
-      nix-direnv.enable = true;
-    };
+    direnv.enable = true;
     nix-ld.enable = true; # Needed for VS Code to work with direnv
   };
 
@@ -239,7 +223,6 @@ in
       powertop
       powerstat
       jellyfin-desktop
-      R
       poppler-utils
       pandoc
       ghostscript
@@ -275,18 +258,6 @@ in
     ];
   };
 
-  nixpkgs.config = {
-    allowUnfree = true;
-    packageOverrides = pkgs: {
-      tailscale = pkgs.tailscale.overrideAttrs (oldAttrs: {
-        doCheck = false; # These Tailscale tests failed for a week, making my system unable to update
-      });
-    };
-    permittedInsecurePackages = [
-      "electron-38.8.4"
-    ];
-  };
-
   nix = {
     gc = {
       automatic = true;
@@ -304,8 +275,6 @@ in
     settings = {
       trusted-users = [ "root" "john" ];
       auto-optimise-store = true;
-      keep-outputs = true;
-      keep-derivations = true;
     };
   };
 
@@ -321,7 +290,7 @@ in
     groups.lpadmin = { };
     users.john = {
       isNormalUser = true;
-      extraGroups = [ "networkmanager" "wheel" "lpadmin" ];
+      extraGroups = [ "networkmanager" "wheel" "lpadmin" "podman" ];
     };
   };
 
