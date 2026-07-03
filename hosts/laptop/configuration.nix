@@ -130,12 +130,7 @@ in
       };
     };
 
-    displayManager = {
-      sddm.enable = true;
-      sddm.wayland.enable = true;
-      defaultSession = "plasma";
-    };
-
+    displayManager.plasma-login-manager.enable = true;
     desktopManager.plasma6.enable = true;
 
     power-profiles-daemon.enable = true;
@@ -218,19 +213,13 @@ in
       lm_sensors
       devenv
       nodejs-slim # Needed for the Copilot extension in IntelliJ and possibly VS Code
-      python312
+      python314
       nvtopPackages.amd
       powertop
       powerstat
       jellyfin-desktop
-      poppler-utils
-      pandoc
-      ghostscript
-      imagemagick
       quickemu
       distrobox
-      dnsutils
-      iw
       networkmanager-openconnect
       unstable.vscode
     ];
