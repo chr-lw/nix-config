@@ -1,6 +1,6 @@
 { ... }:
 {
-  imports = [ ../../modules/home/common.nix ];
+  imports = [ ../modules/home/common.nix ];
 
   # non-NixOS HM requires this
   home.homeDirectory = "/home/john";

@@ -30,22 +30,19 @@
   in
   {
     nixosConfigurations = {
-      laptop = mkSystem {
-        hostName = "laptop";
-        modules = [
-          ./hosts/laptop/configuration.nix
-          ./hosts/laptop/hardware-configuration.nix
-          ];
+      thinkpad = mkSystem {
+        hostName = "ThinkPad";
+        modules = [ ./hosts/thinkpad ];
       };
 
-      home-server = mkSystem {
-        hostName = "home-server";
-        modules = [ ./hosts/home-server/configuration.nix ];
+      precision = mkSystem {
+        hostName = "Precision";
+        modules = [ ./hosts/precision ];
       };
 
-      home-lab = mkSystem {
-        hostName = "home-lab";
-        modules = [ ./hosts/home-lab/configuration.nix ];
+      deskmini = mkSystem {
+        hostName = "DeskMini";
+        modules = [ ./hosts/deskmini ];
       };
     };
 

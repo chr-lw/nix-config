@@ -1,9 +1,4 @@
-{ config, lib, pkgs, ... }:
-let
-  unstable = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz") {
-    config.allowUnfree = true;
-  };
-in
+{ config, lib, pkgs, pkgs.unstable, ... }:
 {
   imports =
     [
@@ -11,7 +6,7 @@ in
     ];
 
   boot = {
-    kernelPackages = pkgs.linuxKernel.packages.linux_6_12;
+    kernelPackages = pkgs.linuxPackages.linux_6_12;
 
     loader = {
       systemd-boot.enable = true;
@@ -21,7 +16,7 @@ in
     supportedFilesystems = [ "zfs" ];
     zfs.package = pkgs.zfs_2_4;
 
-    initrd.systemd = network.wait-online.enable = false;
+    initrd.systemd.network.wait-online.enable = false;
 
     kernelParams = [
       "amdgpu.dcfeaturemask=0x2"
@@ -66,7 +61,7 @@ in
 
   swapDevices = [
     {
-      device = "dev/disk/by-partuuid/322c153f-5e56-481b-a0bf-46f5713aa200";
+      device = "/dev/disk/by-partuuid/322c153f-5e56-481b-a0bf-46f5713aa200";
       randomEncryption.enable = true;
       priority = 0;
     }
@@ -76,7 +71,6 @@ in
 
   networking = {
     hostId = "4b3c47ff"; # NEVER change this!!!
-    hostName = "nixos-laptop";
     firewall = {
       enable = true;
       trustedInterfaces = [ "tailscale0" ];
@@ -106,8 +100,6 @@ in
         networkmanager-openconnect # This is for my university's VPN, based on Cisco AnyConnect.
       ];
     };
-
-    wireless.enable = false; # Disable wpa_supplicant when networkmanager is enabled. The default value is false, but it is enabled under KDE, so we need to disable it.
   };
 
   services = {
@@ -117,18 +109,6 @@ in
     };
 
     tailscale.enable = true;
-
-    xserver = {
-      enable = true;
-      excludePackages = [
-        pkgs.xterm
-      ];
-      xkb = {
-        layout = "dk";
-        variant = "";
-        options = "eurosign:e";
-      };
-    };
 
     displayManager.plasma-login-manager.enable = true;
     desktopManager.plasma6.enable = true;
@@ -221,7 +201,7 @@ in
       quickemu
       distrobox
       networkmanager-openconnect
-      unstable.vscode
+      pkgs-unstable.vscode
     ];
 
     plasma6.excludePackages = with pkgs.kdePackages; [

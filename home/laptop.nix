@@ -1,6 +1,6 @@
 { ... }:
 {
-  imports = [ ../../modules/home/common.nix ];
+  imports = [ ../modules/home/common.nix ];
 
   # laptop-specific HM config
   programs.git = {
