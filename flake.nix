@@ -32,7 +32,10 @@
     nixosConfigurations = {
       thinkpad = mkSystem {
         hostName = "ThinkPad";
-        modules = [ ./hosts/thinkpad ];
+        modules = [
+          ./hosts/thinkpad
+          home-manager.nixosModules.home-manager
+        ];
       };
 
       /* precision = mkSystem {
