@@ -7,4 +7,6 @@
   ];
 
   networking.useDHCP = true; # replace with static config if needed
+
+  system.autoUpgrade.flake = "github:chr-lw/nix-config#deskmini";
 }
