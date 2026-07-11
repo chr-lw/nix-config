@@ -21,10 +21,14 @@
         specialArgs = {
           inherit self;
           # available in NixOS modules as: pkgs-unstable.<pkg>
-          pkgs-unstable = import nixpkgs-unstable { inherit system; };
+          pkgs-unstable = import nixpkgs-unstable {
+            inherit system;
+            config.allowUnfree = true;
+          };
         };
         modules = modules ++ [
           { networking.hostName = hostName; }
+          { nixpkgs.config.allowUnfree = true; }
         ];
       };
   in
