@@ -250,6 +250,9 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+
   system.autoUpgrade = {
     enable = true;
     dates = "04:00";
