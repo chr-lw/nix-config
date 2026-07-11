@@ -3,6 +3,8 @@
   imports =
     [
       ./hardware-configuration.nix
+      ../../modules/nixos/common.nix
+      ../../../modules/nixos/desktop.nix
     ];
 
   boot = {
@@ -229,7 +231,7 @@
     ];
   };
 
-  nix = {
+  /* nix = {
     gc = {
       automatic = true;
       dates = "weekly";
@@ -247,12 +249,10 @@
       trusted-users = [ "root" "john" ];
       auto-optimise-store = true;
     };
-  };
+  }; */
 
-  nixpkgs.config.allowUnfree = true;
-
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
+  /* home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true; */
 
   system.autoUpgrade = {
     enable = true;
