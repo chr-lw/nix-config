@@ -192,6 +192,7 @@
     systemPackages = with pkgs; [
       parted
       lm_sensors
+      git
       devenv
       nodejs-slim # Needed for the Copilot extension in IntelliJ and possibly VS Code
       python314
