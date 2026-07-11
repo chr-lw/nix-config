@@ -1,1 +1,5 @@
-# after installing NixOS on home-lab, copy /etc/nixos/hardware-configuration.nix here
+# after installing NixOS on home-server, copy /etc/nixos/hardware-configuration.nix here
+{ ... }:
+{
+  
+}
