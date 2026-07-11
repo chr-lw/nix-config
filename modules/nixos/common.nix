@@ -3,6 +3,8 @@
 {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  nixpkgs.config.allowUnfree = true;
+
   time.timeZone = lib.mkDefault "UTC";
   i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
 
