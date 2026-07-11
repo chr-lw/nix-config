@@ -248,6 +248,8 @@
     };
   };
 
+  nixpkgs.config.allowUnfree = true;
+
   system.autoUpgrade = {
     enable = true;
     dates = "04:00";
