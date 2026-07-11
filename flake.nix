@@ -35,15 +35,15 @@
         modules = [ ./hosts/thinkpad ];
       };
 
-      precision = mkSystem {
+      /* precision = mkSystem {
         hostName = "Precision";
         modules = [ ./hosts/precision ];
-      };
+      }; */
 
-      deskmini = mkSystem {
+      /* deskmini = mkSystem {
         hostName = "DeskMini";
         modules = [ ./hosts/deskmini ];
-      };
+      }; */
     };
 
     # home-manager on non-NixOS (CachyOS workstation) on unstable
