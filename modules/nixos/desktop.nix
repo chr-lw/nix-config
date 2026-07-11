@@ -17,7 +17,7 @@
     vscode = {
       enable = true;
       package = pkgs-unstable.vscode;
-    }
+    };
   };
 
   environment.systemPackages = with pkgs; [
