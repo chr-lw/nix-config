@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, pkgs-unstable, lib, ... }:
 
 {
   nix.settings = {
@@ -33,29 +33,50 @@
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
 
-
-
-  time.timeZone = lib.mkDefault "UTC";
-  i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
+  time.timeZone = lib.mkDefault "Europe/Copenhagen";
+  i18n.defaultLocale = lib.mkDefault "en_DK.UTF-8";
+  console.keyMap = lib.mkDefault "dk";
 
   services.openssh.enable = true;
 
   users.users.john = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    shell = pkgs.bashInteractive;
+    extraGroups = [ "wheel" "podman" ];
   };
 
-  # Useful baseline packages
+  programs = {
+    git.enable = true;
+    zsh.enable = true;
+    mosh.enable = true;
+    htop.enable = true;
+    iotop.enable = true;
+    tmux.enable = true;
+    traceroute.enable = true;
+    vim.enable = true;
+    neovim.enable = true;
+    nix-ld.enable = true;
+
+    direnv = {
+      enable = true;
+      enableZshIntegration = true;
+      nix-direnv.enable = true;
+    };
+  };
+
   environment.systemPackages = with pkgs; [
+    parted
+    lm_sensors
+    powertop
     git
     curl
     wget
-    vim
   ];
 
-  # enable sudo for wheel
   security.sudo.wheelNeedsPassword = true;
+
+  hardware.enableAllFirmware = true;
+  services.fwupd.enable = true;
+  services.zfs.autoScrub.enable = true;
 
   system.stateVersion = "25.05";
 }

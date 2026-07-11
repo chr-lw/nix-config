@@ -5,6 +5,7 @@
       ./hardware-configuration.nix
       ../../modules/nixos/common.nix
       ../../modules/nixos/desktop.nix
+      ../../modules/nixos/kde.nix
     ];
 
   boot = {
@@ -113,31 +114,7 @@
 
     tailscale.enable = true;
 
-    displayManager.plasma-login-manager.enable = true;
-    desktopManager.plasma6.enable = true;
-
-    power-profiles-daemon.enable = true;
-
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-      jack.enable = true;
-    };
-
-    fwupd.enable = true;
     flatpak.enable = true;
-
-    zfs.autoScrub.enable = true;
-
-    printing = {
-      enable = true;
-      drivers = with pkgs; [
-        cups-filters
-      ];
-      browsed.enable = true;
-    };
 
     udev.extraRules = ''
       SUBSYSTEM=="net", ACTION=="add", NAME=="wlan*", RUN+="${pkgs.iw}/bin/iw reg set DK"
@@ -151,14 +128,6 @@
   };
 
   hardware = {
-    enableAllFirmware = true;
-    cpu.amd.updateMicrocode = true;
-
-    bluetooth = {
-      enable = true;
-      powerOnBoot = false;
-    };
-
     graphics = {
       enable = true;
       enable32Bit = true;
@@ -169,47 +138,16 @@
     };
   };
 
-  time.timeZone = "Europe/Copenhagen";
-  console.keyMap = "dk";
-  i18n.defaultLocale = "en_DK.UTF-8";
-
   security.rtkit.enable = true;
-
-  virtualisation.podman = {
-    enable = true;
-    dockerCompat = true;
-    autoPrune.enable = true;
-  };
-
-  programs = {
-    firefox.enable = true;
-    mosh.enable = true;
-    neovim.enable = true;
-    partition-manager.enable = true;
-    direnv.enable = true;
-    nix-ld.enable = true; # Needed for VS Code to work with direnv
-  };
 
   environment = {
     systemPackages = with pkgs; [
-      parted
-      lm_sensors
-      git
       devenv
-      nodejs-slim # Needed for the Copilot extension in IntelliJ and possibly VS Code
-      python314
       nvtopPackages.amd
-      powertop
       powerstat
-      jellyfin-desktop
       quickemu
       distrobox
       networkmanager-openconnect
-      pkgs-unstable.vscode
-    ];
-
-    plasma6.excludePackages = with pkgs.kdePackages; [
-      khelpcenter
     ];
 
     sessionVariables = {
@@ -220,54 +158,8 @@
     };
   };
 
-  fonts = {
-    enableDefaultPackages = true;
-    packages = with pkgs; [
-      libertinus
-      noto-fonts
-      nerd-fonts.fira-code
-      nerd-fonts.fira-mono
-      nerd-fonts.jetbrains-mono
-    ];
-  };
-
-  users = {
-    groups.lpadmin = { };
-    users.john = {
-      isNormalUser = true;
-      extraGroups = [ "networkmanager" "wheel" "lpadmin" "podman" ];
-    };
-  };
-
   system.autoUpgrade.flake = "github:chr-lw/nix-config#thinkpad";
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
-
-  # This option defines the first version of NixOS you have installed on this particular machine,
-  # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
-  #
-  # Most users should NEVER change this value after the initial install, for any reason,
-  # even if you've upgraded your system to a new NixOS release.
-  #
-  # This value does NOT affect the Nixpkgs version your packages and OS are pulled from,
-  # so changing it will NOT upgrade your system - see https://nixos.org/manual/nixos/stable/#sec-upgrading for how
-  # to actually do that.
-  #
-  # This value being lower than the current NixOS release does NOT mean your system is
-  # out of date, out of support, or vulnerable.
-  #
-  # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
-  # and migrated your data accordingly.
-  #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "25.05"; # Did you read the comment?
 
