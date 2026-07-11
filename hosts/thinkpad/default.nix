@@ -15,6 +15,7 @@
 
     supportedFilesystems = [ "zfs" ];
     zfs.package = pkgs.zfs_2_4;
+    zfs.forceImportRoot = false;
 
     initrd.systemd.network.wait-online.enable = false;
 
