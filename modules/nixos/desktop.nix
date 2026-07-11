@@ -9,7 +9,7 @@
     };
 
   users.groups.lpadmin = { };
-  user.users.john.extraGroups = lib.mkAfter [ "lpadmin" "networkmanager" ];
+  users.users.john.extraGroups = lib.mkAfter [ "lpadmin" "networkmanager" ];
 
   programs = {
     firefox.enable = true;
