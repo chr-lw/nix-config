@@ -231,37 +231,6 @@
     ];
   };
 
-  /* nix = {
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 14d";
-      persistent = true;
-    };
-
-    optimise = {
-      automatic = true;
-      dates = "weekly";
-      persistent = true;
-    };
-
-    settings = {
-      trusted-users = [ "root" "john" ];
-      auto-optimise-store = true;
-    };
-  }; */
-
-  /* home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true; */
-
-  system.autoUpgrade = {
-    enable = true;
-    dates = "04:00";
-    allowReboot = false;
-    randomizedDelaySec = "30min";
-    persistent = true;
-  };
-
   users = {
     groups.lpadmin = { };
     users.john = {
@@ -269,6 +238,8 @@
       extraGroups = [ "networkmanager" "wheel" "lpadmin" "podman" ];
     };
   };
+
+  system.autoUpgrade.flake = "github:chr-lw/nix-config#thinkpad";
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

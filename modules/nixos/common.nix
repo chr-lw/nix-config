@@ -20,10 +20,20 @@
     persistent = true;
   };
 
+  system.autoUpgrade = {
+    enable = true;
+    dates = "04:00";
+    allowReboot = false;
+    randomizedDelaySec = "30min";
+    persistent = true;
+  };
+
   nixpkgs.config.allowUnfree = true;
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
+
+
 
   time.timeZone = lib.mkDefault "UTC";
   i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
