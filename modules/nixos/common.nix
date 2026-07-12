@@ -39,9 +39,21 @@
 
   services.openssh.enable = true;
 
-  users.users.john = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "podman" ];
+  networking = {
+    nftables.enable = true;
+    firewall = {
+      enable = true;
+      trustedInterfaces = [ "tailscale0" ];
+      allowedUDPPorts = [ config.services.tailscale.port ];
+    };
+  };
+
+  services.tailscale.enable = true;
+
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+    autoPrune.enable = true;
   };
 
   programs = {
@@ -71,6 +83,11 @@
     curl
     wget
   ];
+
+  users.users.john = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "podman" ];
+  };
 
   security.sudo.wheelNeedsPassword = true;
 

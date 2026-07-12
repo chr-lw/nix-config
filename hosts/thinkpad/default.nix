@@ -75,13 +75,6 @@
 
   networking = {
     hostId = "4b3c47ff"; # NEVER change this!!!
-    firewall = {
-      enable = true;
-      trustedInterfaces = [ "tailscale0" ];
-      allowedUDPPorts = [ config.services.tailscale.port ];
-    };
-
-    nftables.enable = true;
 
     nameservers = [
       # Mullvad base DNS
@@ -111,8 +104,6 @@
       enable = true;
       settings.Resolve.DNSOverTLS = "opportunistic";
     };
-
-    tailscale.enable = true;
 
     flatpak.enable = true;
 
@@ -159,9 +150,7 @@
   };
 
   system.autoUpgrade.flake = "github:chr-lw/nix-config#thinkpad";
-
-  # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "25.05"; # Did you read the comment?
+  system.stateVersion = "25.05";
 
 }
 
