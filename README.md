@@ -13,7 +13,7 @@ The small bit of documentation on this page is purely for my own benefit. You ar
 ```bash
 sudo mv /etc/nixos /etc/nixos.bak
 ```
-3. Symlink to the repo directory:
+3. Symlink `/etc/nixos` to the repo directory:
 ```bash
 sudo ln -s /home/john/projects/nix-config /etc/nixos
 ```
