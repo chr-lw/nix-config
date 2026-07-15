@@ -113,10 +113,7 @@
 
   };
 
-  systemd = {
-    network.wait-online.enable = false;     # Fix for losing internet connection after waking from hibernation
-    services.tailscaled.serviceConfig.Environment = [ "TS_DEBUG_FIREWALL_MODE=nftables" ];    # Make Tailscale work with nftables
-  };
+  systemd.network.wait-online.enable = false; # Fix for losing wifi connection after suspend or hibernation.
 
   hardware = {
     graphics = {

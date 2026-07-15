@@ -6,5 +6,9 @@
     KbdInteractiveAuthentication = false;
   };
 
-  # Common server hardening toggles can go here later
+  hardware.graphics.extraPackages = with pkgs; [
+    libva
+    intel-media-driver
+  ];
+
 }

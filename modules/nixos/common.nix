@@ -49,6 +49,7 @@
   };
 
   services.tailscale.enable = true;
+  systemd.services.tailscaled.serviceConfig.Environment = [ "TS_DEBUG_FIREWALL_MODE=nftables" ]; # Make Tailscale work with nftables
 
   virtualisation.podman = {
     enable = true;
@@ -79,17 +80,21 @@
     parted
     lm_sensors
     powertop
-    git
     curl
     wget
+    libva-utils
   ];
 
   users.users.john = {
     isNormalUser = true;
     extraGroups = [ "wheel" "podman" ];
   };
-
   security.sudo.wheelNeedsPassword = true;
+
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
 
   hardware.enableAllFirmware = true;
   services.fwupd.enable = true;
