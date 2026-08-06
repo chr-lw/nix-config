@@ -3,9 +3,9 @@
   imports =
     [
       ./hardware-configuration.nix
-      ../../modules/nixos/common.nix
-      ../../modules/nixos/desktop.nix
-      ../../modules/nixos/kde.nix
+      ../../modules/nixos/core
+      ../../modules/nixos/desktop
+      ../../modules/nixos/desktop/wm/kde.nix
     ];
 
   boot = {
@@ -115,16 +115,10 @@
 
   systemd.network.wait-online.enable = false; # Fix for losing wifi connection after suspend or hibernation.
 
-  hardware = {
-    graphics = {
-      enable = true;
-      enable32Bit = true;
-      extraPackages = with pkgs; [
-        libva
-        libva-utils
-      ];
-    };
-  };
+  hardware.graphics.extraPackages = with pkgs; [
+    libva
+    mesa
+  ];
 
   security.rtkit.enable = true;
 
@@ -147,6 +141,7 @@
   };
 
   system.autoUpgrade.flake = "github:chr-lw/nix-config#thinkpad";
+  # Upgrade settings are defined in /modules/nixos/core/
   system.stateVersion = "25.05";
 
 }

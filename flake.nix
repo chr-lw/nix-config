@@ -9,9 +9,21 @@
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixflix = {
+      url = "github:kiriwalawren/nixflix"
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }:
+  outputs = {
+    self,
+    nixpkgs,
+    nixpkgs-unstable,
+    home-manager,
+    nixflix,
+    ...
+  }:
   let
     system = "x86_64-linux";
 
@@ -44,7 +56,10 @@
 
       /* precision = mkSystem {
         hostName = "Precision";
-        modules = [ ./hosts/precision ];
+        modules = [
+          ./hosts/precision
+          nixflix.nixosModules.default
+        ];
       }; */
 
       /* deskmini = mkSystem {

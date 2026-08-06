@@ -2,9 +2,13 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/nixos/common.nix
-    ../../modules/nixos/server.nix
+    ./homelab.nix
+    ../../modules/nixos/core
+    ../../modules/nixos/server.
   ];
+
+  system.autoUpgrade.flake = "github:chr-lw/nix-config#precision";
+  system.stateVersion = "26.05";
 
   fileSystems."/" = {
     device = "tank/root";
@@ -25,6 +29,8 @@
 
   zramSwap.enable = true;
 
-  system.autoUpgrade.flake = "github:chr-lw/nix-config#precision";
-  system.stateVersion = "26.05";
+  services.hddfancontrol = {
+    enable = true;
+  };
+
 }
