@@ -123,18 +123,19 @@
   security.rtkit.enable = true;
 
   environment = {
-    systemPackages = with pkgs; [
-      devenv
-      nvtopPackages.amd
-      powerstat
-      quickemu
-      distrobox
-      networkmanager-openconnect
-    ];
-
-    systemPackages = lib.mkAfter with pkgs-unstable; [
+    systemPackages =
+      (with pkgs; [
+        devenv
+        nvtopPackages.amd
+        powerstat
+        quickemu
+        distrobox
+        networkmanager-openconnect
+    ]);
+    ++
+    (with pkgs-unstable; [
       typst
-    ];
+    ]);
 
     sessionVariables = {
       LIBVA_DRIVER_NAME = "radeonsi";
