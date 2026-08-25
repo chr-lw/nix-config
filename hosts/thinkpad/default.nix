@@ -122,27 +122,25 @@
 
   security.rtkit.enable = true;
 
-  environment = {
-    systemPackages =
-      (with pkgs; [
-        devenv
-        nvtopPackages.amd
-        powerstat
-        quickemu
-        distrobox
-        networkmanager-openconnect
+  environment.systemPackages =
+    (with pkgs; [
+      devenv
+      nvtopPackages.amd
+      powerstat
+      quickemu
+      distrobox
+      networkmanager-openconnect
     ])
     ++
     (with pkgs-unstable; [
       typst
     ]);
 
-    sessionVariables = {
-      LIBVA_DRIVER_NAME = "radeonsi";
-      MOZ_ENABLE_WAYLAND = "1";
-      GTK_USE_PORTAL = "1";
-      NIXOS_OZONE_WL = "1";
-    };
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "radeonsi";
+    MOZ_ENABLE_WAYLAND = "1";
+    GTK_USE_PORTAL = "1";
+    NIXOS_OZONE_WL = "1";
   };
 
   system.autoUpgrade.flake = "github:chr-lw/nix-config#thinkpad";
