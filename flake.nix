@@ -14,6 +14,10 @@
       url = "github:kiriwalawren/nixflix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+
+    helix-notes = {
+      url = "git+https://gitlab.com/ArkHost/HelixNotes";
+    };
   };
 
   outputs = {
@@ -22,6 +26,7 @@
     nixpkgs-unstable,
     home-manager,
     nixflix,
+    helix-notes,
     ...
   }:
   let
@@ -31,7 +36,7 @@
       nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
-          inherit self;
+          inherit self helix-notes;
           # available in NixOS modules as: pkgs-unstable.<pkg>
           pkgs-unstable = import nixpkgs-unstable {
             inherit system;

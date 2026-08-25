@@ -1,4 +1,4 @@
-{ config, lib, pkgs, pkgs-unstable, ... }:
+{ config, lib, pkgs, pkgs-unstable, helix-notes, ... }:
 {
   imports =
     [
@@ -134,7 +134,11 @@
     ++
     (with pkgs-unstable; [
       typst
-    ]);
+    ])
+    ++
+    [
+      (helix-notes.packages.${pkgs.system}.default)
+    ];
 
   environment.sessionVariables = {
     LIBVA_DRIVER_NAME = "radeonsi";
