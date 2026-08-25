@@ -54,4 +54,4 @@
     persistent = true;
   };
   
-};
+}
