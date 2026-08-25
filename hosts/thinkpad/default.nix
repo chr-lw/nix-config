@@ -131,7 +131,7 @@
         quickemu
         distrobox
         networkmanager-openconnect
-    ]);
+    ])
     ++
     (with pkgs-unstable; [
       typst
