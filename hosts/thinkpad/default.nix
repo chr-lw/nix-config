@@ -134,7 +134,7 @@
 
     systemPackages = with pkgs-unstable; [
       typst
-    ]
+    ];
 
     sessionVariables = {
       LIBVA_DRIVER_NAME = "radeonsi";
