@@ -43,6 +43,7 @@
       dates = "weekly";
       options = "--delete-older-than 14d";
       persistent = true;
+    };
   };
 
   system.autoUpgrade = {
