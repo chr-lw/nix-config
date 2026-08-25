@@ -17,7 +17,7 @@
     vscode = {
       enable = true;
       package = pkgs-unstable.vscode;
-      extensions = with pkks-unstable.vscode-extensions [
+      extensions = with pkks-unstable.vscode-extensions; [
         jnoortheen.nix-ide
         arrterian.nix-env-selector
         mkhl.direnv
