@@ -132,7 +132,7 @@
       networkmanager-openconnect
     ];
 
-    systemPackages = with pkgs-unstable; [
+    systemPackages = lib.mkAfter with pkgs-unstable; [
       typst
     ];
 
