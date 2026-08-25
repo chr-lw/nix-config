@@ -32,5 +32,6 @@
     curl
     wget
     libva-utils
+    pciutils
   ];
 }

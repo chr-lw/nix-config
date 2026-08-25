@@ -90,7 +90,6 @@
 
     networkmanager = {
       enable = true;
-      wifi.backend = "wpa_supplicant";
       dns = "systemd-resolved";
       wifi.powersave = false; # This sometimes breaks my connection on eduroam.
       unmanaged = [ "interface-name:p2p-dev-*" ];
