@@ -88,6 +88,8 @@
       "1.1.1.1"
     ];
 
+    wireless.enable = false; # Disable wpa_supplicant
+
     networkmanager = {
       enable = true;
       dns = "systemd-resolved";
