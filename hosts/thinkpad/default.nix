@@ -88,7 +88,7 @@
       "1.1.1.1"
     ];
 
-    wireless.enable = false; # Disable wpa_supplicant
+    wireless.enable = lib.mkForce false; # Disable wpa_supplicant
 
     networkmanager = {
       enable = true;
