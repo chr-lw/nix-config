@@ -17,6 +17,7 @@
 
     helix-notes = {
       url = "git+https://gitlab.com/ArkHost/HelixNotes";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   };
 
