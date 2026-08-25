@@ -132,6 +132,10 @@
       networkmanager-openconnect
     ];
 
+    systemPackages = with pkgs-unstable; [
+      typst
+    ]
+
     sessionVariables = {
       LIBVA_DRIVER_NAME = "radeonsi";
       MOZ_ENABLE_WAYLAND = "1";

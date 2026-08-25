@@ -21,6 +21,10 @@
         jnoortheen.nix-ide
         arrterian.nix-env-selector
         mkhl.direnv
+        ms-python.python
+        ms-toolsai.jupyter
+        redhat.vscode-yaml
+        myriad-dreamin.tinymist
       ];
     };
   };
