@@ -3,7 +3,7 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/nixos/core
-    ../../modules/nixos/server.nix
+    ../../modules/nixos/server
     ../../modules/homelab
   ];
 

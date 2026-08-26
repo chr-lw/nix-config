@@ -4,7 +4,7 @@
     ./hardware-configuration.nix
     ./homelab.nix
     ../../modules/nixos/core
-    ../../modules/nixos/server.
+    ../../modules/nixos/server
   ];
 
   system.autoUpgrade.flake = "github:chr-lw/nix-config#precision";
