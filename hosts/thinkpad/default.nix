@@ -129,6 +129,7 @@
       powerstat
       quickemu
       distrobox
+      distrobox-tui
       networkmanager-openconnect
     ])
     ++
