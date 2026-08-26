@@ -124,7 +124,6 @@
 
   environment.systemPackages =
     (with pkgs; [
-      devenv
       nvtopPackages.amd
       powerstat
       quickemu
@@ -134,6 +133,7 @@
     ])
     ++
     (with pkgs-unstable; [
+      devenv
       typst
     ]);
 
