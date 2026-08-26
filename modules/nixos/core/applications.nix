@@ -19,7 +19,14 @@
     traceroute.enable = true;
     vim.enable = true;
     neovim.enable = true;
-    nix-ld.enable = true;
+
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+        stdenv.cc.cc.lib
+        zlib
+      ];
+    };
 
     direnv = {
       enable = true;
