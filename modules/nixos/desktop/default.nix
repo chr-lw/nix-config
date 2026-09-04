@@ -1,4 +1,8 @@
-{ config, pkgs, pkgs-unstable, lib, ... }:
+{ config, pkgs, pkgs-unstable, inputs, system, lib, ... }:
+
+let
+  vscode-marketplace = inputs.nix-vscode-extensions.extensions.${system}.vscode-marketplace;
+in
 {
   services.printing = {
       enable = true;
@@ -17,7 +21,7 @@
     vscode = {
       enable = true;
       package = pkgs-unstable.vscode;
-      extensions = with pkgs-unstable.vscode-extensions; [
+      extensions = with vscode-marketplace; [
         jnoortheen.nix-ide
         arrterian.nix-env-selector
         mkhl.direnv
@@ -25,6 +29,7 @@
         ms-toolsai.jupyter
         redhat.vscode-yaml
         myriad-dreamin.tinymist
+        mathematic.vscode-pdf
       ];
     };
   };

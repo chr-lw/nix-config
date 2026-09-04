@@ -14,6 +14,11 @@
       url = "github:kiriwalawren/nixflix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+
+    nix-vscode-extensions = {
+      url = "github:nix-community/nix-vscode-extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -22,6 +27,7 @@
     nixpkgs-unstable,
     home-manager,
     nixflix,
+    nix-vscode-extensions,
     ...
   }:
   let
