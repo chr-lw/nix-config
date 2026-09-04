@@ -29,7 +29,8 @@ in
         ms-toolsai.jupyter
         redhat.vscode-yaml
         myriad-dreamin.tinymist
-        mathematic.vscode-pdf
+        #mathematic.vscode-pdf
+        chocolatedesue.modern-pdf-preview
       ];
     };
   };
