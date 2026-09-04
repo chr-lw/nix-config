@@ -29,7 +29,7 @@
     nixflix,
     nix-vscode-extensions,
     ...
-  }:
+  }@inputs:
   let
     system = "x86_64-linux";
 
