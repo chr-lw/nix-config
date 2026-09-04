@@ -37,7 +37,7 @@
       nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
-          inherit self inputs;
+          inherit self inputs system;
           # available in NixOS modules as: pkgs-unstable.<pkg>
           pkgs-unstable = import nixpkgs-unstable {
             inherit system;
