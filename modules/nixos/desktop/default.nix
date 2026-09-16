@@ -12,6 +12,9 @@ in
       browsed.enable = true;
     };
 
+  services.xserver.xkb.layout = "dk";
+  services.xserver.xkb.variant = "nodeadkeys";
+
   users.groups.lpadmin = { };
   users.users.john.extraGroups = lib.mkAfter [ "lpadmin" "networkmanager" ];
 
