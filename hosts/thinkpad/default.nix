@@ -9,7 +9,7 @@
     ];
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_6_18;
+    kernelPackages = pkgs.linuxPackages;
 
     loader = {
       systemd-boot.enable = true;
@@ -23,14 +23,13 @@
     initrd.systemd.network.wait-online.enable = false;
 
     kernelParams = [
-      "amdgpu.dcfeaturemask=0x2"
       "amdgpu.runpm=1"
       "amdgpu.sg_display=0"
       "iommu=pt"
-      "nvme_core.default_ps_max_latency_us=0"
+      #"nvme_core.default_ps_max_latency_us=0" # Disables power management on nvme. Not sure why I put it there
       "amd_pstate=active"
       "zfs.zfs_arc_max=25769803776" # 24GB in bytes
-      "cfg80211.regdomain=DK"
+      #"cfg80211.regdomain=DK" # Redundant. There is already a udev rule for this
     ];
 
     kernel.sysctl = {
