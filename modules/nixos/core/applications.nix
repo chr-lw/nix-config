@@ -36,14 +36,23 @@
   };
 
   environment.systemPackages = with pkgs; [
-    parted
-    lm_sensors
-    powertop
-    curl
-    wget
-    libva-utils
-    pciutils
-    tealdeer
+    # basics
+    wget file tree jq lsof tealdeer
+
+    # search and navigation
+    ripgrep fd fzf ncdu
+
+    # hardware, power, and video
+    pciutils usbutils lm_sensors parted powertop libva-utils smartmontools
+
+    # network
+    dnsutils tcpdump
+
+    # archive
+    zip unzip libarchive
+
+    # other
     podman-tui
+
   ];
 }
