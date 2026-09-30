@@ -33,7 +33,6 @@ in
         redhat.vscode-yaml
         myriad-dreamin.tinymist
         mathematic.vscode-pdf
-        #chocolatedesue.modern-pdf-preview
       ];
     };
   };

@@ -1,16 +1,17 @@
 { config, lib, pkgs, pkgs-unstable, ... }:
 {
-  # Server-focused defaults
-  services.openssh.settings = {
-    PasswordAuthentication = false;
-    KbdInteractiveAuthentication = false;
-  };
-
-  # Both servers have Intel graphics, so we can enable the same packages for both.
+  # Both servers have Intel graphics
   hardware.graphics.extraPackages = with pkgs; [
     libva
     intel-media-driver
     intel-compute-runtime
   ];
+
+  # Enable Caddy reverse proxy for all services. Force everything to https on port 443.
+  services.caddy = {
+    enable = true;
+    httpPort = null;
+    openFirewall = true;
+  };
 
 }

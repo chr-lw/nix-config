@@ -14,7 +14,6 @@
     isNormalUser = true;
     extraGroups = [ "wheel" "podman" ];
   };
-  security.sudo.wheelNeedsPassword = true;
 
   hardware.enableRedistributableFirmware = true;
   hardware.graphics = {
@@ -32,26 +31,12 @@
       auto-optimise-store = true;
     };
 
-    optimise = {
-      automatic = true;
-      dates = "weekly";
-      persistent = true;
-    };
+    optimise.automatic = true;
 
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 14d";
-      persistent = true;
-    };
+    gc.automatic = true;
+    gc.options = "--delete-older-than 14d";
   };
 
-  system.autoUpgrade = {
-    enable = true;
-    dates = "04:00";
-    allowReboot = false;
-    randomizedDelaySec = "30min";
-    persistent = true;
-  };
+  system.autoUpgrade.enable = true;
   
 }

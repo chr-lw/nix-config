@@ -32,12 +32,6 @@
 
   zramSwap.enable = true;
 
-  services.caddy = {
-    enable = true;
-    httpPort = null;
-    openFirewall = true;
-  };
-
   # Homelab services with Caddy integration and TLS.
   # These are defined in modules/services/*.nix and imported in modules/nixos/server.nix
   homelab.services = {

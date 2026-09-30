@@ -13,4 +13,5 @@
   systemd.services.tailscaled.serviceConfig.Environment = [ "TS_DEBUG_FIREWALL_MODE=nftables" ]; # Make Tailscale work with nftables
 
   services.openssh.enable = true;
+  
 }
