@@ -1,4 +1,4 @@
-{ config, lib, pkgs, pkgs-unstable, ... }:
+{ config, lib, pkgs, pkgs-unstable, helix-notes, ... }:
 {
   imports =
     [
@@ -147,6 +147,12 @@
     MOZ_ENABLE_WAYLAND = "1";
     GTK_USE_PORTAL = "1";
     NIXOS_OZONE_WL = "1";
+  };
+
+  users.users."john" = {
+    packages = with pkgs; [
+      (helix-notes.packages.${pkgs.stdenv.hostPlatform.system}.default)
+    ];
   };
 
   system.autoUpgrade.flake = "github:chr-lw/nix-config#thinkpad";
