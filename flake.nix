@@ -20,10 +20,6 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    helix-notes = {
-      url = "git+https://gitlab.com/ArkHost/HelixNotes";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = {
@@ -33,7 +29,6 @@
     home-manager,
     nixflix,
     nix-vscode-extensions,
-    helix-notes,
     ...
   }@inputs:
   let
@@ -43,7 +38,7 @@
       nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
-          inherit self inputs system helix-notes;
+          inherit self inputs system;
           # available in NixOS modules as: pkgs-unstable.<pkg>
           pkgs-unstable = import nixpkgs-unstable {
             inherit system;

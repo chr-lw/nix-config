@@ -149,12 +149,6 @@
     NIXOS_OZONE_WL = "1";
   };
 
-  users.users."john" = {
-    packages = with pkgs; [
-      (helix-notes.packages.${pkgs.stdenv.hostPlatform.system}.default)
-    ];
-  };
-
   system.autoUpgrade.flake = "github:chr-lw/nix-config#thinkpad";
   # Upgrade settings are defined in /modules/nixos/core/
   system.stateVersion = "25.05";
