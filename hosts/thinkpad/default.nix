@@ -127,6 +127,16 @@
       nix-direnv.enable = true;
     };
 
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xgd-desktop-portal-gtk ];
+  };
+
   environment.systemPackages =
     (with pkgs; [
       nvtopPackages.amd
