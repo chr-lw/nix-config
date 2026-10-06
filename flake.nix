@@ -46,12 +46,16 @@
     };
 
     helix-notes-pkg = helix-notes.packages.${system}.default.overrideAttrs (oldAttrs: {
-      pnpmDeps = oldAttrs.pnpmDeps.overrideAttrs (_oldPnpmAttrs: {
-        hash = "sha256-Xp/hSNzvOzqF0ObO/tacchQC1BbzGcQZiVytnvu8dGc=";
-    });
+      pnpmDeps = oldAttrs.pnpmDeps.overrideAttrs {
+        outputHash = "sha256-Xp/hSNzvOzqF0ObO/tacchQC1BbzGcQZiVytnvu8dGc=";
+      };
 
-    cargoHash = nixpkgs.lib.fakeHash;
-  });
+      cargoDeps = pkgs-unstable.rustPlatform.fetchCargoVendor {
+        inherit (oldAttrs) pname version src;
+
+      hash = "sha256-t03bO221qKv0EL3h2e12G2qfKfaRW7BMYqTgKcYRYp8=";
+      };
+    });
 
     mkSystem = { hostName, modules }:
       nixpkgs.lib.nixosSystem {
