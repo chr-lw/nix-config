@@ -1,4 +1,4 @@
-{ config, lib, pkgs, pkgs-unstable, helix-notes, ... }:
+{ config, lib, pkgs, pkgs-unstable, helix-notes-pkg, ... }:
 {
   imports =
     [
@@ -145,6 +145,7 @@
       distrobox
       distrobox-tui
       networkmanager-openconnect
+      helix-notes-pkg
     ])
     ++
     (with pkgs-unstable; [

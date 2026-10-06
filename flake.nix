@@ -20,6 +20,11 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
+    helix-notes = {
+      url = "git+https://gitlab.com/ArkHost/HelixNotes";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
   };
 
   outputs = {
@@ -29,22 +34,30 @@
     home-manager,
     nixflix,
     nix-vscode-extensions,
+    helix-notes,
     ...
   }@inputs:
   let
     system = "x86_64-linux";
 
+    pkgs-unstable = import nixpkgs-unstable {
+      inherit system;
+      config.allowUnfree = true;
+    };
+
+    helix-notes-pkg = helix-notes.packages.${system}.default.overrideAttrs (_oldAttrs: {
+      cargoHash = nixpkgs.lib.fakeHash;
+    });
+
     mkSystem = { hostName, modules }:
       nixpkgs.lib.nixosSystem {
         inherit system;
+
         specialArgs = {
-          inherit self inputs system;
-          # available in NixOS modules as: pkgs-unstable.<pkg>
-          pkgs-unstable = import nixpkgs-unstable {
-            inherit system;
-            config.allowUnfree = true;
-          };
+          inherit self inputs system pkgs-unstable;
+          inherit helix-notes-pkg;
         };
+
         modules = modules ++ [
           { networking.hostName = hostName; }
           { nixpkgs.config.allowUnfree = true; }
@@ -77,12 +90,11 @@
 
     # home-manager on non-NixOS (CachyOS workstation) on unstable
     homeConfigurations."john@cachyos" = home-manager.lib.homeManagerConfiguration {
-      pkgs = import nixpkgs-unstable { inherit system; };
+      pkgs = pkgs-unstable;
       modules = [ ./home/john/cachyos.nix ];
+
       extraSpecialArgs = {
-        inherit self;
-        # optional, for consistency in HM modules:
-        pkgs-unstable = import nixpkgs-unstable { inherit system; };
+        inherit self inputs pkgs-unstable;
       };
     };
   };
