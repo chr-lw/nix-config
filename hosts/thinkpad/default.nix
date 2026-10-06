@@ -157,6 +157,8 @@
     MOZ_ENABLE_WAYLAND = "1";
     GTK_USE_PORTAL = "1";
     NIXOS_OZONE_WL = "1";
+    ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+    AMD_VULKAN_ICD = "RADV";
   };
 
   system.autoUpgrade.flake = "github:chr-lw/nix-config#thinkpad";
