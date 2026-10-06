@@ -134,7 +134,7 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xgd-desktop-portal-gtk ];
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
   environment.systemPackages =
