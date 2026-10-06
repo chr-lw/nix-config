@@ -46,7 +46,9 @@
     };
 
     helix-notes-pkg = helix-notes.packages.${system}.default.overrideAttrs (_oldAttrs: {
-      pnpmDeps.hash = "sha256-Xp/hSNzvOzqF0ObO/tacchQC1BbzGcQZiVytnvu8dGc=";
+      pnpmDeps = oldAttrs.pnpmDeps.overrideAttrs (_oldPnpmAttrs: {
+        hash = "sha256-Xp/hSNzvOzqF0ObO/tacchQC1BbzGcQZiVytnvu8dGc=";
+      });
       cargoHash = nixpkgs.lib.fakeHash;
     });
 
