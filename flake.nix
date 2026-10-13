@@ -21,8 +21,8 @@
     };
 
     helix-notes = {
-      url = "git+https://gitlab.com/ArkHost/HelixNotes";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      url = "git+https://gitlab.com/ArkHost/HelixNotes?ref=refs/tags/v1.3.6";
+      #inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
   };

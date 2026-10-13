@@ -21,20 +21,19 @@
     "helix-notes": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "nixpkgs": [
-          "nixpkgs-unstable"
-        ]
+        "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1791899198,
-        "narHash": "sha256-JI1fg0tdTO10GKIq4w75ovA8Bjz+Dr2FV648q4kXJw8=",
-        "ref": "refs/heads/main",
-        "rev": "557f625947b6f85bc06b1ad18073eca2b79397a5",
-        "revCount": 463,
+        "lastModified": 1790683546,
+        "narHash": "sha256-06U9404JTZju1fjMtzkncWjf2zuww1P+oDLcZak5XkA=",
+        "ref": "refs/tags/v1.3.6",
+        "rev": "e1f1ef0b02c1f48373aecd6b14cc4417ad383003",
+        "revCount": 408,
         "type": "git",
         "url": "https://gitlab.com/ArkHost/HelixNotes"
       },
       "original": {
+        "ref": "refs/tags/v1.3.6",
         "type": "git",
         "url": "https://gitlab.com/ArkHost/HelixNotes"
       }
@@ -121,16 +120,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1791765022,
-        "narHash": "sha256-ZGq3ptZzA+oO0N/Wi/F+GbuTijLkYExD01LvpNFAvr0=",
+        "lastModified": 1785571196,
+        "narHash": "sha256-KoTsyMQqnXQZq8deCEnu4QkyldkwH/bpMMhUcfMdGIw=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "7993f34ee47e28a3d607a525aadc6c94b73be728",
+        "rev": "148bab9c1c3c53136ecb44a6ea356a0ed5b39b06",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixos-26.05",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -151,13 +150,29 @@
         "type": "github"
       }
     },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1791765022,
+        "narHash": "sha256-ZGq3ptZzA+oO0N/Wi/F+GbuTijLkYExD01LvpNFAvr0=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "7993f34ee47e28a3d607a525aadc6c94b73be728",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-26.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "helix-notes": "helix-notes",
         "home-manager": "home-manager",
         "nix-vscode-extensions": "nix-vscode-extensions",
         "nixflix": "nixflix",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable"
       }
     },
