@@ -47,13 +47,12 @@
 
     helix-notes-pkg = helix-notes.packages.${system}.default.overrideAttrs (oldAttrs: {
       pnpmDeps = oldAttrs.pnpmDeps.overrideAttrs {
-        outputHash = "sha256-Xp/hSNzvOzqF0ObO/tacchQC1BbzGcQZiVytnvu8dGc=";
+        outputHash = "sha256-iYyTATpiVf4/xkCmB3wjIcR71L2nMAqZuNJ6tlpb9qI=";
       };
 
       cargoDeps = pkgs-unstable.rustPlatform.fetchCargoVendor {
         inherit (oldAttrs) pname version src;
-
-      hash = "sha256-t03bO221qKv0EL3h2e12G2qfKfaRW7BMYqTgKcYRYp8=";
+        hash = "sha256-t03bO221qKv0EL3h2e12G2qfKfaRW7BMYqTgKcYRYp8=";
       };
     });
 
