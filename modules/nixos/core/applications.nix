@@ -1,4 +1,4 @@
-{ pkgs, pkgs-unstable, ... }:
+{ pkgs, ... }:
 {
   virtualisation.podman = {
     enable = true;
@@ -14,7 +14,6 @@
     zsh.enable = true;
     mosh.enable = true;
     htop.enable = true;
-    iotop.enable = true;
     tmux.enable = true;
     traceroute.enable = true;
     vim.enable = true;

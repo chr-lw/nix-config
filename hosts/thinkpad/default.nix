@@ -1,4 +1,4 @@
-{ config, lib, pkgs, pkgs-unstable, helix-notes-pkg, ... }:
+{ config, lib, pkgs, helix-notes-pkg, ... }:
 {
   imports =
     [
@@ -121,12 +121,6 @@
 
   security.rtkit.enable = true;
 
-  programs.direnv = {
-      enable = true;
-      # enableZshIntegration = true;
-      nix-direnv.enable = true;
-    };
-
   programs.appimage = {
     enable = true;
     binfmt = true;
@@ -137,21 +131,17 @@
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
-  environment.systemPackages =
-    (with pkgs; [
-      nvtopPackages.amd
-      powerstat
-      quickemu
-      distrobox
-      distrobox-tui
-      networkmanager-openconnect
-      helix-notes-pkg
-    ])
-    ++
-    (with pkgs-unstable; [
-      devenv
-      typst
-    ]);
+  environment.systemPackages = with pkgs; [
+    nvtopPackages.amd
+    powerstat
+    quickemu
+    distrobox
+    distrobox-tui
+    networkmanager-openconnect
+    helix-notes-pkg
+    devenv
+    typst
+  ];
 
   environment.sessionVariables = {
     LIBVA_DRIVER_NAME = "radeonsi";

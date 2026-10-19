@@ -1,8 +1,5 @@
-{ config, pkgs, pkgs-unstable, inputs, system, lib, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
-let
-  vscode-marketplace = inputs.nix-vscode-extensions.extensions.${system}.vscode-marketplace;
-in
 {
   services.printing = {
       enable = true;
@@ -23,8 +20,8 @@ in
     partition-manager.enable = true;
     vscode = {
       enable = true;
-      package = pkgs-unstable.vscode;
-      extensions = with vscode-marketplace; [
+      package = pkgs.vscode;
+      extensions = with pkgs.vscode-marketplace; [
         jnoortheen.nix-ide
         arrterian.nix-env-selector
         mkhl.direnv
