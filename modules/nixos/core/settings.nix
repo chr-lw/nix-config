@@ -5,6 +5,8 @@
   i18n.defaultLocale = "en_DK.UTF-8";
   console.keyMap = "dk";
 
+  environment.pathsToLink = [ "/share/zsh" ];
+
   users.users.john = {
     isNormalUser = true;
     extraGroups = [ "wheel" "podman" ];

@@ -10,15 +10,10 @@
   };
 
   programs = {
-    git.enable = true;
     zsh.enable = true;
     mosh.enable = true;
-    htop.enable = true;
-    tmux.enable = true;
     traceroute.enable = true;
-    vim.enable = true;
     neovim.enable = true;
-
     nix-ld = {
       enable = true;
       libraries = with pkgs; [
@@ -29,26 +24,12 @@
   };
 
   environment.systemPackages = with pkgs; [
-    # basics
-    wget file tree jq lsof tealdeer
-
-    # search and navigation
-    ripgrep fd fzf ncdu
-
-    # hardware, power, and video
-    pciutils usbutils lm_sensors parted powertop libva-utils smartmontools
-
-    # network
-    dnsutils tcpdump
-
-    # archive
-    zip unzip libarchive
-
-    # nix tools
-    nvd
-
-    # other
-    podman-tui
-
+    pciutils
+    usbutils
+    lm_sensors
+    parted
+    powertop
+    libva-utils
+    smartmontools
   ];
 }
