@@ -44,6 +44,9 @@
     # archive
     zip unzip libarchive
 
+    # nix tools
+    nvd
+
     # other
     podman-tui
 
