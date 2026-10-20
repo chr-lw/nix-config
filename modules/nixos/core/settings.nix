@@ -10,6 +10,7 @@
   users.users.john = {
     isNormalUser = true;
     extraGroups = [ "wheel" "podman" ];
+    shell = pkgs.zsh;
   };
 
   hardware.enableRedistributableFirmware = true;

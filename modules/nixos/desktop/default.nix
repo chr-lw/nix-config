@@ -1,6 +1,8 @@
 { config, pkgs, inputs, lib, ... }:
 
 {
+  imports = [ ./home.nix ];
+
   services.printing = {
       enable = true;
       drivers = with pkgs; [
@@ -18,20 +20,6 @@
   programs = {
     firefox.enable = true;
     partition-manager.enable = true;
-    vscode = {
-      enable = true;
-      package = pkgs.vscode;
-      extensions = with pkgs.vscode-marketplace; [
-        jnoortheen.nix-ide
-        arrterian.nix-env-selector
-        mkhl.direnv
-        ms-python.python
-        ms-toolsai.jupyter
-        redhat.vscode-yaml
-        myriad-dreamin.tinymist
-        mathematic.vscode-pdf
-      ];
-    };
   };
 
   environment.systemPackages = with pkgs; [

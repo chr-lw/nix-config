@@ -15,13 +15,6 @@
 
       programs = {
         fd.enable = true;
-        fzf = {
-          enable = true;
-          enableBashIntegration = true;
-          enableZshIntegration = true;
-          tmux.enableShellIntegration = true;
-          tmux.shellIntegrationOptions = [ "-d 40%" ];
-        };
         git.enable = true;
         home-manager.enable = true;
         htop.enable = true;
@@ -29,6 +22,15 @@
         mc.enable = true;
         ripgrep.enable = true;
         tealdeer.enable = true;
+
+        fzf = {
+          enable = true;
+          enableBashIntegration = true;
+          enableZshIntegration = true;
+          tmux.enableShellIntegration = true;
+          tmux.shellIntegrationOptions = [ "-d 40%" ];
+        };
+        
         tmux = {
           enable = true;
           baseIndex = 1;
@@ -36,15 +38,27 @@
           mouse = true;
           terminal = "screen-256color";
         };
+        
         vim = {
           enable = true;
           defaultEditor = true;
+          packageConfigurable = pkgs.vim;
         };
+        
         zsh = {
           enable = true;
           autosuggestion.enable = true;
+          enableCompletion = true;
           syntaxHighlighting.enable = true;
+          history.size = 10000;
         };
+
+        starship = {
+          enable = true;
+          enableBashIntegration = true;
+          enableZshIntegration = true;
+        };
+
       };
 
       home.packages = with pkgs; [

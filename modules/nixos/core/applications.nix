@@ -13,7 +13,6 @@
     zsh.enable = true;
     mosh.enable = true;
     traceroute.enable = true;
-    neovim.enable = true;
     nix-ld = {
       enable = true;
       libraries = with pkgs; [
