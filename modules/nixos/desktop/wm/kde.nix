@@ -8,13 +8,11 @@
     environment.QT_QPA_PLATFORM = "offscreen";
   };
 
+  programs.kde-pim.enable = false;
+
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     akonadiconsole
     khelpcenter
-    kmail
-    kontact
-    ktnef
-    merkuro
   ];
 
   environment.systemPackages = with pkgs.kdePackages; [
