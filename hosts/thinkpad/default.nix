@@ -1,4 +1,15 @@
-{ config, lib, pkgs, helix-notes-pkg, ... }:
+{ config, inputs, pkgs, ... }:
+let
+  helix-notes = inputs.helix-notes.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (old: {
+    pnpmDeps = old.pnpmDeps.overrideAttrs {
+      outputHash = "sha256-iYyTATpiVf4/xkCmB3wjIcR71L2nMAqZuNJ6tlpb9qI=";
+    };
+    cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
+      inherit (old) pname version src;
+      hash = "sha256-t03bO221qKv0EL3h2e12G2qfKfaRW7BMYqTgKcYRYp8=";
+    };
+  });
+in
 {
   imports =
     [
@@ -138,7 +149,7 @@
     distrobox
     distrobox-tui
     networkmanager-openconnect
-    helix-notes-pkg
+    helix-notes
     devenv
     typst
   ];

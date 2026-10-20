@@ -22,7 +22,7 @@
     helix-notes.url = "git+https://gitlab.com/ArkHost/HelixNotes?ref=refs/tags/v1.3.6";
   };
 
-  outputs = { nixpkgs, home-manager, helix-notes, ... }@inputs:
+  outputs = { nixpkgs, home-manager, ... }@inputs:
     let
       system = "x86_64-linux";
 
@@ -33,21 +33,10 @@
         config.allowUnfree = true;
       };
 
-      # Upstream hashes are stale, so override them here.
-      helix-notes-pkg = helix-notes.packages.${system}.default.overrideAttrs (old: {
-        pnpmDeps = old.pnpmDeps.overrideAttrs {
-          outputHash = "sha256-iYyTATpiVf4/xkCmB3wjIcR71L2nMAqZuNJ6tlpb9qI=";
-        };
-        cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
-          inherit (old) pname version src;
-          hash = "sha256-t03bO221qKv0EL3h2e12G2qfKfaRW7BMYqTgKcYRYp8=";
-        };
-      });
-
       mkHost = hostName: modules:
         nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs helix-notes-pkg; };
+          specialArgs = { inherit inputs; };
           modules = modules ++ [
             {
               networking.hostName = hostName;
@@ -59,10 +48,7 @@
     in
     {
       nixosConfigurations = {
-        thinkpad = mkHost "ThinkPad" [
-          ./hosts/thinkpad
-          home-manager.nixosModules.home-manager
-        ];
+        thinkpad = mkHost "ThinkPad" [ ./hosts/thinkpad ];
 
         # precision = mkHost "Precision" [
         #   ./hosts/precision
@@ -76,7 +62,7 @@
       homeConfigurations."john@cachyos" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ ./home/john/cachyos.nix ];
-        extraSpecialArgs = { inherit inputs helix-notes-pkg; };
+        extraSpecialArgs = { inherit inputs; };
       };
     };
 }
