@@ -3,14 +3,6 @@
 {
   imports = [ ./home.nix ];
 
-  services.printing = {
-      enable = true;
-      drivers = with pkgs; [
-        cups-filters
-      ];
-      browsed.enable = true;
-    };
-
   services.xserver.xkb.layout = "dk";
   services.xserver.xkb.variant = "nodeadkeys";
 
@@ -19,7 +11,6 @@
 
   programs = {
     firefox.enable = true;
-    partition-manager.enable = true;
   };
 
   environment.systemPackages = with pkgs; [

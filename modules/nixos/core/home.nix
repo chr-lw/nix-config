@@ -14,14 +14,20 @@
       home.stateVersion = "26.11";
 
       programs = {
+        btop.enable = true;
         fd.enable = true;
+        fresh-editor.enable = true;
         git.enable = true;
         home-manager.enable = true;
         htop.enable = true;
-        jq.enable = true;
+        lf.enable = true;
         mc.enable = true;
         ripgrep.enable = true;
-        tealdeer.enable = true;
+
+        tealdeer = {
+          enable = true;
+          enableAutoUpdates = true;
+        };
 
         fzf = {
           enable = true;
@@ -37,6 +43,11 @@
           clock24 = true;
           mouse = true;
           terminal = "screen-256color";
+        };
+
+        zellij = {
+          enable = true;
+          enableZshIntegration = true;
         };
         
         vim = {
@@ -56,6 +67,11 @@
         starship = {
           enable = true;
           enableBashIntegration = true;
+          enableZshIntegration = true;
+        };
+
+        yazi = {
+          enable = true;
           enableZshIntegration = true;
         };
 

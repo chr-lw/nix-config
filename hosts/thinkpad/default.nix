@@ -132,11 +132,6 @@ in
 
   security.rtkit.enable = true;
 
-  programs.appimage = {
-    enable = true;
-    binfmt = true;
-  };
-
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
@@ -152,6 +147,7 @@ in
     helix-notes
     devenv
     typst
+    emacs-pgtk
   ];
 
   environment.sessionVariables = {
@@ -164,7 +160,7 @@ in
   };
 
   system.autoUpgrade.flake = "github:chr-lw/nix-config#thinkpad";
-  # Upgrade settings are defined in /modules/nixos/core/
+  # Upgrade settings are defined for all hosts in ./modules/nixos/core/
   system.stateVersion = "25.05";
 
 }

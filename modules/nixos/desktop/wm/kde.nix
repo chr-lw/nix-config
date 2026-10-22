@@ -8,7 +8,10 @@
     environment.QT_QPA_PLATFORM = "offscreen";
   };
 
-  programs.kde-pim.enable = false;
+  programs = {
+    kde-pim.enable = false;
+    partition-manager.enable = true;
+  };
 
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     akonadiconsole
