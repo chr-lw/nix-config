@@ -1,7 +1,7 @@
 { config, pkgs, inputs, lib, ... }:
 
 {
-  imports = [ ./home.nix ];
+  home-manager.users.john.imports = [ ../../../home/desktop.nix ];
 
   services.xserver.xkb.layout = "dk";
   services.xserver.xkb.variant = "nodeadkeys";

@@ -19,24 +19,27 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    helix-notes.url = "git+https://gitlab.com/ArkHost/HelixNotes?ref=refs/tags/v1.3.6";
+    helix-notes = {
+      url = "git+https://gitlab.com/ArkHost/HelixNotes?ref=refs/tags/v1.3.6";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, ... }@inputs:
+  outputs = { nixpkgs, home-manager, helix-notes, ... }@inputs:
     let
       system = "x86_64-linux";
 
       overlays = [ inputs.nix-vscode-extensions.overlays.default ];
 
       pkgs = import nixpkgs {
-        inherit system;
+        inherit system overlays;
         config.allowUnfree = true;
       };
 
       mkHost = hostName: modules:
         nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs helix-notes; };
           modules = modules ++ [
             {
               networking.hostName = hostName;
@@ -61,7 +64,7 @@
       # home-manager on the CachyOS workstation
       homeConfigurations."john@cachyos" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./home/john/cachyos.nix ];
+        modules = [ ./home/cachyos.nix ];
         extraSpecialArgs = { inherit inputs; };
       };
     };

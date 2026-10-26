@@ -1,12 +1,5 @@
-{ ... }:
 {
-  imports = [ ../modules/home/common.nix ];
-
-  # non-NixOS HM requires this
+  #imports = [ ./core.nix ./desktop.nix ];
+  home.username = "john";
   home.homeDirectory = "/home/john";
-
-  programs.git = {
-    userName = "john";
-    userEmail = "john@example.com"; # change me
-  };
 }

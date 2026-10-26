@@ -1,5 +1,7 @@
 { config, lib, pkgs, pkgs-unstable, ... }:
 {
+  home-manager.users.john.imports = [ ../../../home/server.nix ];
+
   # Both servers have Intel graphics
   hardware.graphics.extraPackages = with pkgs; [
     libva

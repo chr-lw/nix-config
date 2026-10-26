@@ -1,8 +1,8 @@
-{ config, inputs, pkgs, ... }:
+{ config, inputs, pkgs, helix-notes, ... }:
 let
   helix-notes = inputs.helix-notes.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (old: {
     pnpmDeps = old.pnpmDeps.overrideAttrs {
-      outputHash = "sha256-iYyTATpiVf4/xkCmB3wjIcR71L2nMAqZuNJ6tlpb9qI=";
+      outputHash = "sha256-xfzamKcryQIYBm+b3dul0lRK3O8+sLVF4vibVS3NWGU=";
     };
     cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
       inherit (old) pname version src;
