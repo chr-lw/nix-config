@@ -2,7 +2,11 @@
   description = "NixOS + home-manager config";
 
   inputs = {
+    # Base channel. Change to "github:NixOS/nixpkgs/nixos-26.11" once that branch exists.
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    # Source for pkgs.unstable.* (VS Code and a few others). Stays on unstable.
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -29,7 +33,15 @@
     let
       system = "x86_64-linux";
 
-      overlays = [ inputs.nix-vscode-extensions.overlays.default ];
+      unstableOverlay = _final: _prev: {
+        unstable = import inputs.nixpkgs-unstable {
+          inherit system;
+          config.allowUnfree = true;
+          overlays = [ inputs.nix-vscode-extensions.overlays.default ];
+        };
+      };
+
+      overlays = [ unstableOverlay ];
 
       pkgs = import nixpkgs {
         inherit system overlays;
@@ -63,7 +75,7 @@
 
       # home-manager on the CachyOS workstation
       homeConfigurations."john@cachyos" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+        pkgs = pkgs.unstable;
         modules = [ ./home/cachyos.nix ];
         extraSpecialArgs = { inherit inputs; };
       };

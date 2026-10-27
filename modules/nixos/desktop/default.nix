@@ -11,6 +11,7 @@
 
   programs = {
     firefox.enable = true;
+    obs-studio.enable = true;
   };
 
   environment.systemPackages = with pkgs; [

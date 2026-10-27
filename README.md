@@ -1,10 +1,8 @@
 # nix-config
 
-This is my Nix config. It's still in development. I am in the middle of migrating my laptop from the standard configuration.nix setup to flakes and home-manager while upgrading from 25.11 to 26.05.
+This is my Nix config. It's still in development, and I refactor all the time.
 
 So far, I have four hosts: a ThinkPad and two servers, as well as a workstation/gaming pc running CachyOS with the Nix package manager installed.
-
-The small bit of documentation on this page is purely for my own benefit. You are free to clone or fork the repo or just copy/paste any code you find useful.
 
 ## Migrating from configuration.nix to flakes
 
