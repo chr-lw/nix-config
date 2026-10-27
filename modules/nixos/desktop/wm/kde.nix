@@ -8,10 +8,14 @@
     environment.QT_QPA_PLATFORM = "offscreen";
   };
 
-  systemd.user.services.plasma-plasmashell = {
+  # Remove this when the KDE shutdown timeout bug is fixed
+  systemd.user.units."plasma-plasmashell.service" = {
     overrideStrategy = "asDropin";
-    serviceConfig.TimeoutStopSec = "5s";
-  }; # Remove this when KDE shutdown timeout bug is fixed
+    text = ''
+      [Service]
+      TimeoutStopSec=5s
+    '';
+  };
 
   programs = {
     kde-pim.enable = false;
