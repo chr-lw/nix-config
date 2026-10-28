@@ -85,18 +85,11 @@ in
 
   networking = {
     hostId = "4b3c47ff"; # NEVER change this!!!
-
+    
     nameservers = [
-      # Mullvad base DNS
-      "194.242.2.4"
-      
-      # Quad9
-      "9.9.9.9"
-      "149.112.112.112"
-
-      # Cloudflare
-      "1.1.1.1"
-    ];
+      "9.9.9.9#dns.quad9.net"
+      "149.112.112.112#dns.quad9.net"
+    ];  
 
     networkmanager = {
       enable = true;
@@ -109,19 +102,16 @@ in
     };
   };
 
-  services = {
-    resolved = {
-      enable = true;
-      settings.Resolve.DNSOverTLS = "opportunistic";
-    };
-
-    flatpak.enable = true;
-
-    udev.extraRules = ''
-      SUBSYSTEM=="net", ACTION=="add", NAME=="wlan*", RUN+="${pkgs.iw}/bin/iw reg set DK"
-    '';
-
+  services.resolved = {
+    enable = true;
+    settings.Resolve.DNSOverTLS = "opportunistic";
   };
+
+  services.flatpak.enable = true;
+
+  services.udev.extraRules = ''
+    SUBSYSTEM=="net", ACTION=="add", NAME=="wlan*", RUN+="${pkgs.iw}/bin/iw reg set DK"
+  '';
 
   systemd.network.wait-online.enable = false; # Fix for losing wifi connection after suspend or hibernation.
 
