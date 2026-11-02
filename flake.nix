@@ -25,7 +25,7 @@
 
     helix-notes = {
       url = "git+https://gitlab.com/ArkHost/HelixNotes?ref=refs/tags/v1.3.6";
-      inputs.nixpkgs.follows = "nixpkgs";
+      #inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
