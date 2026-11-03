@@ -85,27 +85,19 @@ in
 
   networking = {
     hostId = "4b3c47ff"; # NEVER change this!!!
-    
-    nameservers = [
-      "9.9.9.9#dns.quad9.net"
-      "149.112.112.112#dns.quad9.net"
-    ];  
 
     networkmanager = {
       enable = true;
       dns = "systemd-resolved";
-      wifi.powersave = false; # This sometimes breaks my connection on eduroam.
+      wifi.powersave = false;
       unmanaged = [ "interface-name:p2p-dev-*" ];
       plugins = with pkgs; [
-        networkmanager-openconnect # This is for my university's VPN, based on Cisco AnyConnect.
+        networkmanager-openconnect
       ];
     };
   };
 
-  services.resolved = {
-    enable = true;
-    settings.Resolve.DNSOverTLS = "opportunistic";
-  };
+  services.resolved.enable = true;
 
   services.flatpak.enable = true;
 
