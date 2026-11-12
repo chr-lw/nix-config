@@ -23,13 +23,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    helix-notes = {
-      url = "git+https://gitlab.com/ArkHost/HelixNotes?ref=refs/tags/v1.3.6";
-      #inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = { nixpkgs, home-manager, helix-notes, ... }@inputs:
+  outputs = { nixpkgs, home-manager, ... }@inputs:
     let
       system = "x86_64-linux";
 
@@ -51,7 +47,7 @@
       mkHost = hostName: modules:
         nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs helix-notes; };
+          specialArgs = { inherit inputs; };
           modules = modules ++ [
             {
               networking.hostName = hostName;

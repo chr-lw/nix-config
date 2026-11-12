@@ -5,7 +5,7 @@
     
     mediaDir = "/data/media"; # This should be on the hdd pool
     # stateDir = "/data/.state"; # Defaults to /var/lib when commented out. Don't know what is best
-    downloadsDir = "/data/downloads"; # This should be on the nvme pool to prevent the hdds from spinning when downloading
+    downloadsDir = "/data/downloads"; # This should be on the nvme pool to prevent the hdds from spinning when downloading, and to prevent small disk writes
     
     mediaUsers = [ "john" ];
 
