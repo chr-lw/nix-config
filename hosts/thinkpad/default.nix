@@ -91,6 +91,14 @@
 
   services.flatpak.enable = true;
 
+  services.keyd = {
+    enable = true;
+    keyboards.default = {
+      ids = [ "*" ];
+      settings.main.capslock = "overload(control, esc)";
+    };
+  };
+
   services.udev.extraRules = ''
     SUBSYSTEM=="net", ACTION=="add", NAME=="wlan*", RUN+="${pkgs.iw}/bin/iw reg set DK"
   '';
