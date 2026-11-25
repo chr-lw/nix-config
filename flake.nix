@@ -59,14 +59,14 @@
     in
     {
       nixosConfigurations = {
-        thinkpad = mkHost "ThinkPad" [ ./hosts/thinkpad ];
+        thinkpad = mkHost "thinkpad" [ ./hosts/thinkpad ];
 
-        # precision = mkHost "Precision" [
+        # precision = mkHost "precision" [
         #   ./hosts/precision
         #   inputs.nixflix.nixosModules.default
         # ];
 
-        # deskmini = mkHost "DeskMini" [ ./hosts/deskmini ];
+        # deskmini = mkHost "deskmini" [ ./hosts/deskmini ];
       };
 
       # home-manager on the CachyOS workstation
