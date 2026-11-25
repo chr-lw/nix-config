@@ -5,13 +5,13 @@
     firewall = {
       enable = true;
       trustedInterfaces = [ "tailscale0" ];
-      allowedUDPPorts = [ config.services.tailscale.port ];
     };
   };
 
   services.tailscale.enable = true;
-  systemd.services.tailscaled.serviceConfig.Environment = [ "TS_DEBUG_FIREWALL_MODE=nftables" ]; # Make Tailscale work with nftables
+  services.tailscale.openFirewall = true;
 
   services.openssh.enable = true;
+  programs.mosh.enable = true;
   
 }

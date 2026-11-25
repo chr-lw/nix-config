@@ -11,8 +11,6 @@
 
   programs = {
     zsh.enable = true;
-    mosh.enable = true;
-    traceroute.enable = true;
     nix-ld = {
       enable = true;
       libraries = with pkgs; [
