@@ -27,6 +27,12 @@
       experimental-features = [ "nix-command" "flakes" ];
       trusted-users = [ "root" "john" ];
       auto-optimise-store = true;
+
+      http-connections = 50;
+      max-substitution-jobs = 32;
+      download-buffer-size = 524288000;  # 500 MiB; avoids "download buffer is full" stalls
+      connect-timeout = 5;
+      fallback = true;                   # build locally if a cache is unreachable
     };
 
     optimise.automatic = true;
