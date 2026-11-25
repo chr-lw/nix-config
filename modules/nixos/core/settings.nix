@@ -22,23 +22,26 @@
   services.fwupd.enable = true;
   services.zfs.autoScrub.enable = true;
 
+  programs.nh = {
+    enable = true;
+    flake = "/etc/nixos";
+    clean = {
+      enable = true;
+      extraArgs = "--keep 5 --keep-since 14d";
+    };
+  };
+
   nix = {
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
-      trusted-users = [ "root" "john" ];
-      auto-optimise-store = true;
-
       http-connections = 50;
       max-substitution-jobs = 32;
-      download-buffer-size = 524288000;  # 500 MiB; avoids "download buffer is full" stalls
+      download-buffer-size = 268435456;  # 256 MB
       connect-timeout = 5;
-      fallback = true;                   # build locally if a cache is unreachable
+      fallback = true;
     };
 
     optimise.automatic = true;
-
-    gc.automatic = true;
-    gc.options = "--delete-older-than 14d";
   };
 
   system.autoUpgrade.enable = true;
